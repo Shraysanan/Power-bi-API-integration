@@ -9,7 +9,7 @@ $.ajax({
 }, 
 "data": { 
 "grant_type": "password",
-"username": "{your-username}",
+"username": "{your username}",
 "password": "{your password}",
 "client_id": "{your client id}",
 "scope": "https://analysis.windows.net/powerbi/api/.default",
@@ -26,11 +26,29 @@ console.log(JSON.stringify(error));
 }) 
 }
 //############################################################################################
+//getting workspace
+var myworkspaceid;
+function getworkspace(){
+var settings = {
+  "url": "https://api.powerbi.com/v1.0/myorg/groups",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+    "Authorization": `Bearer ${token}`
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  myworkspaceid=response.value[0].id;
+});
+}
+//############################################################################################
 var myembedurl,myreportid,myembedtoken;
 function getreport(){
 $.ajax({
 type: 'GET',
-url: "https://api.powerbi.com/v1.0/myorg/groups/{power bi workspace id}/reports",
+url: `https://api.powerbi.com/v1.0/myorg/groups/${myworkspaceid}/reports`,
 headers: {
 "Authorization": `Bearer ${token}`
 },
@@ -49,7 +67,7 @@ console.log(data)
 function getembedtoken(){
 $.ajax({
 type: 'POST',
-url: "https://api.powerbi.com/v1.0/myorg/groups/{power bi workspace id}/reports/{your report id}/GenerateToken",
+url: `https://api.powerbi.com/v1.0/myorg/groups/${myworkspaceid}/reports/${myreportid}/GenerateToken`,
 headers: {
 "Content-Type": "application/json",
 "Authorization": `Bearer ${token}`
@@ -107,8 +125,8 @@ var report = powerbi.embed(embedContainer, config);
 //##################################################################################################
 
 function getdashboards(){
-	var settings = {
-  "url": "https://api.powerbi.com/v1.0/myorg/groups/{power bi workspace id}/dashboards",
+  var settings = {
+  "url": `https://api.powerbi.com/v1.0/myorg/groups/${myworkspaceid}/dashboards`,
   "method": "GET",
   "timeout": 0,
   "headers": {
@@ -124,8 +142,8 @@ $.ajax(settings).done(function (response) {
 }
 
 function dashboardtoken(){
-	var settings = {
-  "url": "https://api.powerbi.com/v1.0/myorg/groups/{power bi workspace id}/dashboards/{your dashboard id}/GenerateToken",
+  var settings = {
+  "url": `https://api.powerbi.com/v1.0/myorg/groups/${myworkspaceid}/dashboards/${dashboardid}/GenerateToken`,
   "method": "POST",
   "timeout": 0,
   "headers": {
