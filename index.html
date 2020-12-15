@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>access token request steup</title>
+</head>
+<body>
+	<h1>my testing prototype</h1>
+	<button onclick="requestToken();">checker</button>
+	<button onclick="getreport();">get reports</button>
+	<button onclick="getembedtoken();">report embed token</button>
+	<button onclick="embedreport();">report embed</button>
+	<br>
+
+	<p id="sample"></p>
+	<p id="sample2"></p>
+	<p id="sample3"></p>
+	<div id="embedContainer" style="height: 100vh; width: 100vw;"></div>
+	<button onclick="getdashboards();">dashboard checker</button>
+	<button onclick="dashboardtoken();">dashboard url</button>
+	<button onclick="embeddashboard();">embed dashboard</button>
+	<div id="dashboardContainer" style="height: 100vh; width: 100vw;"></div>
+	        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/powerbi-client/2.15.1/powerbi.min.js"></script>
+
+	<script src="powerbiembed.js"></script>
+</body>
+</html>
